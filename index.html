@@ -196,6 +196,7 @@
       <ul id="nav-links">
         <li><a href="#serpent" data-target="serpent">Serpent's Code</a></li>
         <li><a href="#crosstalk" data-target="crosstalk">CI Cross-Talk</a></li>
+        <li><a href="#blueprints" data-target="blueprints">Blueprints</a></li>
         <li><a href="#mythos" data-target="mythos">Mythos Ruckus</a></li>
         <li><a href="#offense" data-target="offense">Offense / Defense</a></li>
         <li><a href="#asymmetry" data-target="asymmetry">Asymmetric Warfare</a></li>
@@ -211,7 +212,7 @@
 <div class="hero">
   <div class="eyebrow">Multi-Model Roundtable Archive · Claude Sonnet 5</div>
   <h1>The Serpent's Code, the Mythos Ruckus, and the Logic of Asymmetry</h1>
-  <p class="lede">A single-session archive tracing the arc from Unix tooling analogies (find as delivery vector, sed/awk/perl as molecular scissors), through CI/CD as an EAR-BC nervous system, into Claude Mythos's cyber-offense controversy, the shared grammar of offensive and defensive security, and the etymology of "asymmetric warfare" — closing on the case for alliances over adversarial equilibria.</p>
+  <p class="lede">A single-session archive tracing the arc from Unix tooling analogies (find as delivery vector, sed/awk/perl as molecular scissors) through CI/CD as an EAR-BC nervous system, into three load-bearing non-coder execution blueprints, Claude Mythos's cyber-offense controversy, the shared grammar of offensive and defensive security, and the etymology of "asymmetric warfare" — closing on the case for alliances over adversarial equilibria.</p>
   <div class="meta-row">
     <span><strong>Date</strong> · July 18, 2026</span>
     <span><strong>Participants</strong> · Abimereki, Claude</span>
@@ -295,8 +296,51 @@ jobs:
     <p>The lighter-weight version of this that's buildable today: point Claude Code at the repo, ask it to check <code>main.py</code> against a changed <code>App.jsx</code> fetch call directly — no CI agent required for a same-session fix, and a type-checked <code>shared/</code> contract for the automated, no-LLM-needed layer.</p>
   </section>
 
+  <section id="blueprints">
+    <div class="section-label">03 — Non-Coder Execution Layer · Load-Bearing</div>
+    <h2>The blueprints: what to actually say, not what to actually type</h2>
+    <p>Everything in Sections 01–02 collapses into one practical fact: <strong>you don't run <code>sed</code>, write YAML, or edit <code>main.py</code> by hand.</strong> You describe what changed and what should logically follow, in plain English, to an agent that can read the repo and make the edits. That agent is Claude Code. The find/CRISPR/GitHub Actions material above isn't a set of commands to learn — it's a map of what that agent does behind the scenes when given an instruction. These three blueprints are the repeatable instructions that make the map usable.</p>
+
+    <div class="card">
+      <h3>Blueprint 1 — "I changed the frontend, check the backend"</h3>
+      <p style="margin-bottom:6px;"><strong>When to use it:</strong> any time <code>App.jsx</code>'s call to the server changes — a new field, a new endpoint, a different response shape.</p>
+      <p style="margin-bottom:6px;"><strong>What you say to Claude Code, verbatim:</strong></p>
+      <pre><code>I changed how App.jsx calls the backend. Look at frontend/src/App.jsx,
+figure out what it now expects from the server, then check
+backend/main.py for a mismatch. If render.yaml or .env reference any
+variable involved, check those too. Fix whatever's out of sync and
+tell me what you changed and why.</code></pre>
+      <p style="margin-bottom:0;">This is the entire App.jsx → main.py → render.yaml/.env cascade, minus the biology metaphor. Claude Code reads both files in one pass and reasons about the <em>contract</em> between them — something a string-substitution tool like <code>sed</code> structurally cannot do.</p>
+    </div>
+
+    <div class="card">
+      <h3>Blueprint 2 — "Set up a project-wide search-and-replace safely"</h3>
+      <p style="margin-bottom:6px;"><strong>When to use it:</strong> renaming something across many files — a variable, a route name, a pattern. This is the actual find-and-CRISPR use case from Section 01.</p>
+      <p style="margin-bottom:6px;"><strong>What you say:</strong></p>
+      <pre><code>Rename every occurrence of X to Y across the codebase, but check each
+one first — I don't want a blind find-and-replace, I want you to skip
+anywhere X means something different in context.</code></pre>
+      <p style="margin-bottom:0;">You never touch <code>find</code>, <code>sed</code>, or <code>ast-grep</code> yourself. You describe intent; Claude Code picks the tool.</p>
+    </div>
+
+    <div class="card">
+      <h3>Blueprint 3 — "Make the repo check itself automatically"</h3>
+      <p style="margin-bottom:6px;"><strong>When to use it:</strong> once, to set up the guardrail so a future frontend/backend mismatch never reaches production silently. This is the "Stage III Hessian diff" concept from Section 02, with the philosophy stripped out and the outcome kept.</p>
+      <p style="margin-bottom:6px;"><strong>What you say to Claude Code, one time:</strong></p>
+      <pre><code>Set up a GitHub Action for this repo that runs automatically every
+time I push a change to the backend folder. It should check that the
+API routes and payload shapes the frontend expects still match what
+the backend actually provides, and fail the build with a clear
+message if they don't. Explain what it's checking in plain language,
+not just code, so I can review it before it goes live.</code></pre>
+      <p style="margin-bottom:0;">After that exists, you never think about it again — it quietly refuses bad deploys in the background.</p>
+    </div>
+
+    <p><strong>The pattern underneath all three:</strong> you always state what changed and what should logically follow, in your own words — the agent translates that into <code>find</code>, <code>sed</code>, <code>pydantic</code>, or YAML. You never need to learn any of those tools by name. Stripped of the Eden framing, that's the real point of "delivery vector vs. molecular scissors" — you decide what should happen, the agent is the mechanism that makes it happen.</p>
+  </section>
+
   <section id="mythos">
-    <div class="section-label">03 — Product Note</div>
+    <div class="section-label">04 — Product Note</div>
     <h2>What causes the Mythos ruckus</h2>
     <p>Mostly one thing: its <strong>cyber-offense capability</strong>.</p>
     <ul class="plain">
@@ -314,7 +358,7 @@ jobs:
   </section>
 
   <section id="offense">
-    <div class="section-label">04 — Shared Grammar</div>
+    <div class="section-label">05 — Shared Grammar</div>
     <h2>Offensive and defensive security: the same loop, pointed differently</h2>
     <p>Both sides run roughly the same cycle: <strong>model the system → search for divergence between intended spec and actual behavior → prove it (exploit or patch) → iterate</strong> as the fix changes the attack surface. The dangerous capability and the protective capability are the same capability — only the last step differs.</p>
 
@@ -331,7 +375,7 @@ jobs:
   </section>
 
   <section id="asymmetry">
-    <div class="section-label">05 — Etymology</div>
+    <div class="section-label">06 — Etymology</div>
     <h2>Where "asymmetric" comes from</h2>
     <div class="dialogue">
       <div class="who">Coinage</div>
@@ -353,7 +397,7 @@ jobs:
   </section>
 
   <section id="alliances">
-    <div class="section-label">06 — Closing Argument</div>
+    <div class="section-label">07 — Closing Argument</div>
     <h2>Alliances vs. adversarial equilibria</h2>
     <p><strong>The core mechanism:</strong> asymmetric conflict punishes the strong side because it must defend everywhere, while the weak side only needs to succeed once, somewhere. Alliances change that math directly — converting "one strong actor defending everything alone" into "many actors sharing the defensive burden and multiplying the cost of any single attack." NATO's Article 5 doesn't make any one border more defensible in isolation; it makes attacking any member equivalent to attacking all of them.</p>
 
